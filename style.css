@@ -90,7 +90,7 @@ section{scroll-margin-top:90px}
 .glow-one{background:var(--cyan);left:-180px;top:100px}
 .glow-two{background:var(--pink);right:-180px;bottom:60px}
 .hero-inner{position:relative;z-index:2;max-width:1050px}
-..eyebrow{
+.eyebrow{
   display:inline-block;
   position:relative;
 
