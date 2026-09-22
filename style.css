@@ -95,52 +95,67 @@ section{scroll-margin-top:90px}
   position:relative;
 
   color:var(--cyan);
-  font-size:12px;
+  font-size:13px;
   font-weight:800;
   letter-spacing:2px;
+  margin-bottom:22px;
 
   white-space:nowrap;
   overflow:hidden;
 
   width:0;
+  border-right:2px solid var(--cyan);
 
   text-shadow:
-    0 0 8px rgba(0,229,255,.7),
-    0 0 18px rgba(0,229,255,.35);
+    0 0 8px rgba(0,229,255,.8),
+    0 0 18px rgba(124,58,237,.5);
 
   animation:
-    eyebrowTyping 3s steps(32,end) forwards,
-    eyebrowGlow 2s ease-in-out 3s infinite alternate;
+    eyebrowTyping 5s steps(31,end) infinite,
+    eyebrowCursor .7s step-end infinite,
+    eyebrowGlow 1.5s ease-in-out infinite alternate;
 }
 
-/* Typing animation */
 @keyframes eyebrowTyping{
-  from{
+  0%{
     width:0;
   }
 
-  to{
-    width:34ch;
+  45%{
+    width:31ch;
   }
-}
 
-/* Neon glow */
-@keyframes eyebrowGlow{
-  0%{
-    text-shadow:
-      0 0 5px rgba(0,229,255,.4),
-      0 0 10px rgba(0,229,255,.2);
-
-    transform:translateY(0);
+  75%{
+    width:31ch;
   }
 
   100%{
-    text-shadow:
-      0 0 10px rgba(0,229,255,.9),
-      0 0 25px rgba(168,85,247,.6),
-      0 0 40px rgba(255,0,200,.25);
+    width:0;
+  }
+}
 
-    transform:translateY(-3px);
+@keyframes eyebrowCursor{
+  0%,100%{
+    border-color:var(--cyan);
+  }
+
+  50%{
+    border-color:transparent;
+  }
+}
+
+@keyframes eyebrowGlow{
+  from{
+    text-shadow:
+      0 0 5px rgba(0,229,255,.5),
+      0 0 10px rgba(0,229,255,.3);
+  }
+
+  to{
+    text-shadow:
+      0 0 10px rgba(0,229,255,1),
+      0 0 25px rgba(124,58,237,.8),
+      0 0 40px rgba(255,45,149,.4);
   }
 }
 .hero h1{
