@@ -140,10 +140,33 @@ section{scroll-margin-top:90px}
   border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.25)
 }
 .avatar{
-  width:105px;height:105px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:34px;font-weight:950;
-  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
-  box-shadow:0 0 45px rgba(0,229,255,.2)
+  width:105px;
+  height:105px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  padding:3px;
+  box-sizing:border-box;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    var(--cyan),
+    var(--purple),
+    var(--pink)
+  );
+
+  box-shadow:0 0 45px rgba(0,229,255,.2);
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  display:block;
+
+  object-fit:cover;
+  object-position:center;
+
+  border-radius:50%;
 }
 .profile-card h3{font-size:19px}
 .profile-card p{color:var(--muted);font-size:13px;margin:10px 0 22px}
