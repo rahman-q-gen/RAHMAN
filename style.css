@@ -90,7 +90,59 @@ section{scroll-margin-top:90px}
 .glow-one{background:var(--cyan);left:-180px;top:100px}
 .glow-two{background:var(--pink);right:-180px;bottom:60px}
 .hero-inner{position:relative;z-index:2;max-width:1050px}
-.eyebrow{color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:2px;margin-bottom:22px}
+..eyebrow{
+  display:inline-block;
+  position:relative;
+
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+
+  white-space:nowrap;
+  overflow:hidden;
+
+  width:0;
+
+  text-shadow:
+    0 0 8px rgba(0,229,255,.7),
+    0 0 18px rgba(0,229,255,.35);
+
+  animation:
+    eyebrowTyping 3s steps(32,end) forwards,
+    eyebrowGlow 2s ease-in-out 3s infinite alternate;
+}
+
+/* Typing animation */
+@keyframes eyebrowTyping{
+  from{
+    width:0;
+  }
+
+  to{
+    width:34ch;
+  }
+}
+
+/* Neon glow */
+@keyframes eyebrowGlow{
+  0%{
+    text-shadow:
+      0 0 5px rgba(0,229,255,.4),
+      0 0 10px rgba(0,229,255,.2);
+
+    transform:translateY(0);
+  }
+
+  100%{
+    text-shadow:
+      0 0 10px rgba(0,229,255,.9),
+      0 0 25px rgba(168,85,247,.6),
+      0 0 40px rgba(255,0,200,.25);
+
+    transform:translateY(-3px);
+  }
+}
 .hero h1{
   font-size:clamp(42px,8vw,92px);line-height:1.02;font-weight:950;letter-spacing:-2px;
   margin-bottom:22px;
