@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Table-based DOCX question bank থেকে shuffled Set A-Z প্রশ্নপত্র ও explanation answer sheet তৈরি করার browser-based generator.">
+  <title>Question Generator | MD. ABDUR RAHMAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="question-generator.css">
+</head>
+<body>
+  <header class="qg-site-header">
+    <nav class="qg-navbar">
+      <a href="index.html#home" class="qg-brand">MD. ABDUR RAHMAN</a>
+      <div class="qg-nav-links">
+        <a href="index.html#work">WORK</a>
+        <a href="index.html">PORTFOLIO ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="qg-page">
+    <section class="qg-hero" aria-labelledby="pageTitle">
+      <div class="hero-icon" aria-hidden="true">Q</div>
+      <div>
+        <p class="eyebrow">WORK / QUESTION GENERATOR</p>
+        <h1 id="pageTitle">প্রশ্নপত্র জেনারেটর</h1>
+        <p class="subtitle">Admin DOCX-এর table থেকে প্রশ্ন, A-D option, সঠিক উত্তর ও ব্যাখ্যা পড়বে। Generate করার আগে ফাঁকা প্রশ্ন/option যাচাই হবে, আর আপনি চাইলে শুধু প্রশ্ন অথবা প্রশ্ন ও option দুটোই shuffle করতে পারবেন।</p>
+      </div>
+    </section>
+
+    <section class="qg-panel" aria-labelledby="generatorTitle">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">ADMIN DOCX INPUT</p>
+          <h2 id="generatorTitle">Question Bank আপলোড করুন</h2>
+          <p>আপনার T-08.docx-এর মতো table-based ফাইল ব্যবহার করুন। Upload হওয়ার পর ফাইল যাচাই হবে; এরপর নিচের দুইটি mode থেকে প্রয়োজনমতো Generate করুন।</p>
+        </div>
+        <a class="back-btn" href="index.html#work">← Work-এ ফিরে যান</a>
+      </div>
+
+      <div class="upload-zone" id="dropZone" tabindex="0" role="button" aria-label="DOCX ফাইল নির্বাচন করুন">
+        <div class="upload-icon" aria-hidden="true">⬆</div>
+        <h3>Admin DOCX এখানে Drag & Drop করুন</h3>
+        <p>অথবা নিচের বাটনে ক্লিক করে ফাইল নির্বাচন করুন</p>
+        <label class="file-btn">
+          <input id="docxFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          📄 DOCX নির্বাচন করুন
+        </label>
+        <div class="selected-file" id="selectedFile">কোনো ফাইল নির্বাচন করা হয়নি</div>
+        <div class="detected" id="detectedInfo" hidden></div>
+      </div>
+
+      <div class="settings-grid">
+        <label>
+          <span>পরীক্ষার নাম</span>
+          <input id="examName" value="T-08" autocomplete="off">
+        </label>
+        <label>
+          <span>বিষয় / টপিক</span>
+          <input id="subjectName" value="Meghna" autocomplete="off">
+        </label>
+        <label>
+          <span>কতটি Set</span>
+          <input id="setCount" type="number" min="1" max="26" value="4">
+        </label>
+        <label>
+          <span>প্রতি Set-এ প্রশ্ন</span>
+          <input id="questionsPerSet" type="number" min="1" value="100">
+        </label>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <strong>Admin file structure</strong>
+          <span>Question | A | B | C | D | Answer | Explanation — প্রথমে blank/serial column থাকলেও চলবে। Word equation (OMML) ও embedded image রাখা হবে।</span>
+        </div>
+        <div class="info-box">
+          <strong>Validation & shuffle</strong>
+          <span>প্রশ্ন বা A-D option ফাঁকা থাকলে Generate বন্ধ থাকবে। Explanation ফাঁকা থাকলে confirmation দেখাবে। Option shuffle mode-এ সঠিক Answer-ও নতুন option position অনুযায়ী বদলাবে।</span>
+        </div>
+      </div>
+
+      <div class="shuffle-panel" aria-labelledby="shuffleTitle">
+        <div>
+          <p class="eyebrow">SHUFFLE MODE</p>
+          <h3 id="shuffleTitle">কীভাবে প্রশ্ন জেনারেট করবেন?</h3>
+          <p>প্রথম mode-এ শুধু প্রশ্নের ক্রম বদলাবে। দ্বিতীয় mode-এ প্রশ্নের ক্রমের পাশাপাশি প্রতিটি প্রশ্নের A-D option-ও shuffle হবে।</p>
+        </div>
+        <div class="mode-actions">
+          <button id="generateQuestionsBtn" class="primary-btn mode-btn" type="button" disabled>
+            <span class="mode-icon">①</span>
+            <span><strong>শুধু প্রশ্ন Shuffle</strong><small>Option A-D অপরিবর্তিত থাকবে</small></span>
+          </button>
+          <button id="generateQuestionsOptionsBtn" class="option-shuffle-btn mode-btn" type="button" disabled>
+            <span class="mode-icon">②</span>
+            <span><strong>প্রশ্ন + Option Shuffle</strong><small>Answer নতুন option অনুযায়ী ঠিক থাকবে</small></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="actions secondary-actions">
+        <button id="resetBtn" class="secondary-btn" type="button">↻ Reset</button>
+      </div>
+
+      <div class="status" id="status" aria-live="polite"></div>
+      <pre class="debug" id="debug" aria-label="Parser debug output"></pre>
+    </section>
+
+    <section class="results" id="results" aria-labelledby="resultsTitle">
+      <div class="results-head">
+        <div>
+          <p class="eyebrow">GENERATED SETS</p>
+          <h2 id="resultsTitle">ডাউনলোড করুন</h2>
+          <p class="results-note" id="resultsNote"></p>
+        </div>
+        <button id="downloadAllBtn" class="download-all" type="button" disabled>⬇ সব Set ZIP</button>
+      </div>
+      <div class="set-grid" id="setGrid"></div>
+    </section>
+  </main>
+
+  <footer class="qg-footer">© 2026 MD. ABDUR RAHMAN · Question Generator</footer>
+
+  <div class="qg-modal" id="messageModal" hidden>
+    <div class="qg-modal-backdrop" data-modal-close></div>
+    <div class="qg-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
+      <div class="qg-modal-icon" id="modalIcon" aria-hidden="true">!</div>
+      <h3 id="modalTitle">বার্তা</h3>
+      <div class="qg-modal-message" id="modalMessage"></div>
+      <div class="qg-modal-actions">
+        <button id="modalCancelBtn" class="modal-cancel" type="button">না</button>
+        <button id="modalConfirmBtn" class="modal-confirm" type="button">ঠিক আছে</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="jszip.min.js"></script>
+  <script src="question-generator.js"></script>
+</body>
+</html>
