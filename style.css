@@ -654,15 +654,3 @@ footer{text-align:center;padding:30px 20px;color:#748096;font-size:12px}
   .project-grid{grid-template-columns:1fr}
   .qg-card-badge{top:14px;right:14px}
 }
-
-body{
-  display:block !important;
-  visibility:visible !important;
-  opacity:1 !important;
-}
-
-main{
-  display:block !important;
-  visibility:visible !important;
-  opacity:1 !important;
-}
